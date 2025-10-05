@@ -1,0 +1,105 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
+All colors MUST be HSL.
+*/
+
+@layer base {
+  :root {
+    /* Brand colors - The HR Hub SME Services */
+    --hr-green: 150 100% 14%;
+    --hr-orange: 14 100% 54%;
+    --hr-off-white: 52 95% 94%;
+    --hr-lemon: 59 100% 45%;
+    --hr-black: 0 0% 0%;
+    
+    /* Semantic tokens */
+    --background: 52 95% 94%;
+    --foreground: 150 100% 14%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 150 100% 14%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 150 100% 14%;
+
+    --primary: 150 100% 14%;
+    --primary-foreground: 52 95% 94%;
+
+    --secondary: 14 100% 54%;
+    --secondary-foreground: 0 0% 100%;
+
+    --muted: 52 50% 92%;
+    --muted-foreground: 150 30% 35%;
+
+    --accent: 59 100% 45%;
+    --accent-foreground: 0 0% 0%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 150 20% 85%;
+    --input: 150 20% 85%;
+    --ring: 150 100% 14%;
+
+    --radius: 2rem;
+
+    /* Gradients */
+    --gradient-hero: linear-gradient(135deg, hsl(150 100% 14%), hsl(150 80% 20%));
+    --gradient-accent: linear-gradient(135deg, hsl(14 100% 54%), hsl(14 100% 64%));
+    --gradient-subtle: linear-gradient(180deg, hsl(52 95% 94%), hsl(52 80% 88%));
+    
+    /* Shadows */
+    --shadow-card: 0 4px 24px -4px hsl(150 100% 14% / 0.08);
+    --shadow-lift: 0 12px 40px -8px hsl(150 100% 14% / 0.15);
+    
+    /* Animations */
+    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground font-body;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-heading;
+  }
+}
+
+@layer utilities {
+  .animate-fade-in {
+    animation: fadeIn 0.8s ease-out forwards;
+  }
+  
+  .animate-slide-up {
+    animation: slideUp 0.6s ease-out forwards;
+  }
+  
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+  
+  @keyframes slideUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+}
