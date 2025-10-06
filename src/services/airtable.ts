@@ -43,7 +43,6 @@ export const submitQuoteRequest = async (data: QuoteFormData): Promise<void> => 
                 'Location/Country': data.location,
                 'Service Interest': data.serviceInterest,
                 'Message': data.message,
-                'Status': 'New'
             }
         })
     });
@@ -77,7 +76,6 @@ export const submitStrategyCall = async (data: StrategyCallFormData): Promise<vo
                 'Phone': data.phone,
                 'Company Name': data.company,
                 'Message': data.message || '',
-                'Status': 'New'
             }
         })
     });
