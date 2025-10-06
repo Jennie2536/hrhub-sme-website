@@ -43,7 +43,6 @@ export const submitQuoteRequest = async (data: QuoteFormData): Promise<void> => 
                 'Location/Country': data.location,
                 'Service Interest': data.serviceInterest,
                 'Message': data.message,
-                'Submission Date': new Date().toISOString(),
                 'Status': 'New'
             }
         })
