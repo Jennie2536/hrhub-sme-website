@@ -131,10 +131,11 @@ const RecruitmentServices = () => {
             variant="cta"
             size="lg"
             onClick={handleDownloadRecruitment}
-            className="w-full md:w-auto min-w-[280px]"
+            className="w-full md:w-auto min-w-[250px]"
           >
             <FileDown className="mr-2 flex-shrink-0" />
-            <span className="whitespace-nowrap">Download Recruitment Brochure</span>
+            <span className="hidden sm:inline">Download Recruitment Brochure</span>
+            <span className="sm:hidden">Download Brochure</span>
           </Button>
         </div>
       </div>

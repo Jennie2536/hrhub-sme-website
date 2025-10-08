@@ -42,9 +42,9 @@ const FinalCTA = () => {
             </p>
           </div>
 
-          <div className="grid md:grid-cols-2 gap-4 md:gap-6 mb-8">
+          <div className="grid md:grid-cols-2 gap-4 md:gap-6 mb-8 max-w-full">
             {/* In Nigeria Card */}
-            <div className="bg-card/95 backdrop-blur-sm p-6 md:p-8 rounded-3xl shadow-xl">
+            <div className="bg-card/95 backdrop-blur-sm p-6 md:p-8 rounded-3xl shadow-xl w-full max-w-full overflow-hidden">
               <div className="flex items-center gap-2 mb-4">
                 <MapPin className="w-5 h-5 text-primary flex-shrink-0" />
                 <h3 className="text-xl md:text-2xl font-semibold text-foreground">
@@ -62,7 +62,8 @@ const FinalCTA = () => {
                   onClick={handleDownloadRecruitment}
                 >
                   <FileDown className="mr-2 flex-shrink-0" size={20} />
-                  <span className="truncate">Download Recruitment Brochure</span>
+                  <span className="hidden sm:inline">Download Recruitment Brochure</span>
+                  <span className="sm:hidden">Recruitment Brochure</span>
                 </Button>
                 <Button
                   variant="cta"
@@ -71,13 +72,14 @@ const FinalCTA = () => {
                   onClick={handleDownloadHRM}
                 >
                   <FileDown className="mr-2 flex-shrink-0" size={20} />
-                  <span className="truncate">Download HRM Brochure</span>
+                  <span className="hidden sm:inline">Download HRM Brochure</span>
+                  <span className="sm:hidden">HRM Brochure</span>
                 </Button>
               </div>
             </div>
 
             {/* Outside Nigeria Card */}
-            <div className="bg-card/95 backdrop-blur-sm p-6 md:p-8 rounded-3xl shadow-xl">
+            <div className="bg-card/95 backdrop-blur-sm p-6 md:p-8 rounded-3xl shadow-xl w-full max-w-full overflow-hidden">
               <div className="flex items-center gap-2 mb-4">
                 <MapPin className="w-5 h-5 text-secondary flex-shrink-0" />
                 <h3 className="text-xl md:text-2xl font-semibold text-foreground">
