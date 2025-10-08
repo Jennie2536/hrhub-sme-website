@@ -27,71 +27,73 @@ const FinalCTA = () => {
 
   return (
     <>
-      <section id="cta" className="py-20 px-6 bg-gradient-to-br from-primary via-primary/95 to-primary/90 relative overflow-hidden">
+      <section id="cta" className="py-16 md:py-20 px-4 md:px-6 bg-gradient-to-br from-primary via-primary/95 to-primary/90 relative overflow-hidden">
         {/* Decorative elements */}
         <div className="absolute top-10 left-10 w-64 h-64 bg-accent/10 rounded-full blur-3xl" />
         <div className="absolute bottom-10 right-10 w-80 h-80 bg-secondary/10 rounded-full blur-3xl" />
 
         <div className="container mx-auto max-w-4xl relative z-10">
-          <div className="text-center mb-12 animate-fade-in">
-            <h2 className="text-4xl md:text-5xl font-bold text-primary-foreground mb-6">
+          <div className="text-center mb-8 md:mb-12 animate-fade-in">
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-primary-foreground mb-4 md:mb-6 px-2">
               Ready to Build Your Team Right?
             </h2>
-            <p className="text-xl text-primary-foreground/90">
+            <p className="text-lg md:text-xl text-primary-foreground/90 px-4">
               Get started with transparent, affordable HR solutions designed for Nigerian SMEs.
             </p>
           </div>
 
-          <div className="grid md:grid-cols-2 gap-6 mb-8">
-            <div className="bg-card/95 backdrop-blur-sm p-8 rounded-3xl shadow-xl">
+          <div className="grid md:grid-cols-2 gap-4 md:gap-6 mb-8">
+            {/* In Nigeria Card */}
+            <div className="bg-card/95 backdrop-blur-sm p-6 md:p-8 rounded-3xl shadow-xl">
               <div className="flex items-center gap-2 mb-4">
-                <MapPin className="w-5 h-5 text-primary" />
-                <h3 className="text-2xl font-semibold text-foreground">
+                <MapPin className="w-5 h-5 text-primary flex-shrink-0" />
+                <h3 className="text-xl md:text-2xl font-semibold text-foreground">
                   In Nigeria?
                 </h3>
               </div>
-              <p className="text-muted-foreground mb-6">
+              <p className="text-sm md:text-base text-muted-foreground mb-6">
                 Download our comprehensive brochures to learn more about our services.
               </p>
               <div className="space-y-3">
                 <Button
                   variant="hero"
                   size="lg"
-                  className="w-full bg-primary text-primary-foreground"
+                  className="w-full bg-primary text-primary-foreground justify-center"
                   onClick={handleDownloadRecruitment}
                 >
-                  <FileDown className="mr-2" />
-                  Download Recruitment Brochure
+                  <FileDown className="mr-2 flex-shrink-0" size={20} />
+                  <span className="truncate">Download Recruitment Brochure</span>
                 </Button>
                 <Button
                   variant="cta"
                   size="lg"
-                  className="w-full"
+                  className="w-full justify-center"
                   onClick={handleDownloadHRM}
                 >
-                  <FileDown className="mr-2" />
-                  Download HRM Brochure
+                  <FileDown className="mr-2 flex-shrink-0" size={20} />
+                  <span className="truncate">Download HRM Brochure</span>
                 </Button>
               </div>
             </div>
 
-            <div className="bg-card/95 backdrop-blur-sm p-8 rounded-3xl shadow-xl">
+            {/* Outside Nigeria Card */}
+            <div className="bg-card/95 backdrop-blur-sm p-6 md:p-8 rounded-3xl shadow-xl">
               <div className="flex items-center gap-2 mb-4">
-                <MapPin className="w-5 h-5 text-secondary" />
-                <h3 className="text-2xl font-semibold text-foreground">
+                <MapPin className="w-5 h-5 text-secondary flex-shrink-0" />
+                <h3 className="text-xl md:text-2xl font-semibold text-foreground">
                   Outside Nigeria?
                 </h3>
               </div>
-              <p className="text-muted-foreground mb-6">
+              <p className="text-sm md:text-base text-muted-foreground mb-6">
                 Request a customized quote tailored to your location and needs.
               </p>
               <Button
                 variant="outline"
                 size="lg"
-                className="w-full border-2 border-primary text-primary hover:bg-primary hover:text-primary-foreground"
+                className="w-full border-2 border-primary text-primary hover:bg-primary hover:text-primary-foreground justify-center"
                 onClick={handleRequestQuote}
               >
-                Request a Quote
+                <span className="font-semibold">Request a Quote</span>
               </Button>
             </div>
           </div>

@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { CheckCircle2, FileDown } from "lucide-react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import recruitmentImage from "@/assets/recruitment-image.jpg";
+import recruitmentImage from "@/assets/recruitment-image-3.jpg";
 
 const RecruitmentServices = () => {
   const handleDownloadRecruitment = () => {
@@ -94,14 +94,14 @@ const RecruitmentServices = () => {
                 </div>
               )}
               <CardHeader className="relative">
-                <CardTitle className="text-2xl">{pkg.title}</CardTitle>
+                <CardTitle className="text-xl md:text-2xl break-words">{pkg.title}</CardTitle>
                 <div className="mt-4">
-                  <div className="text-4xl font-bold text-primary">{pkg.price}</div>
+                  <div className="text-3xl md:text-4xl font-bold text-primary break-words">{pkg.price}</div>
                   <div className="text-sm text-muted-foreground">{pkg.subtitle}</div>
                 </div>
               </CardHeader>
               <CardContent className="relative space-y-4">
-                <CardDescription className="text-base leading-relaxed">
+                <CardDescription className="text-sm md:text-base leading-relaxed">
                   {pkg.description}
                 </CardDescription>
                 <p className="text-sm font-medium text-foreground">
@@ -112,28 +112,29 @@ const RecruitmentServices = () => {
           ))}
         </div>
 
-        <div className="bg-card rounded-3xl p-8 mb-8 shadow-[var(--shadow-card)]">
-          <h3 className="text-2xl font-semibold text-foreground mb-6 text-center">
+        <div className="bg-card rounded-3xl p-6 md:p-8 mb-8 shadow-[var(--shadow-card)]">
+          <h3 className="text-xl md:text-2xl font-semibold text-foreground mb-6 text-center">
             Key Benefits
           </h3>
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
             {benefits.map((benefit, index) => (
               <div key={index} className="flex items-center gap-3">
                 <CheckCircle2 className="w-5 h-5 text-primary flex-shrink-0" />
-                <span className="text-foreground">{benefit}</span>
+                <span className="text-sm md:text-base text-foreground">{benefit}</span>
               </div>
             ))}
           </div>
         </div>
 
-        <div className="text-center">
+        <div className="text-center px-4">
           <Button
             variant="cta"
             size="lg"
             onClick={handleDownloadRecruitment}
+            className="w-full md:w-auto min-w-[280px]"
           >
-            <FileDown className="mr-2" />
-            Download Recruitment Brochure
+            <FileDown className="mr-2 flex-shrink-0" />
+            <span className="whitespace-nowrap">Download Recruitment Brochure</span>
           </Button>
         </div>
       </div>
