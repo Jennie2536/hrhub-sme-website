@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Menu, X } from "lucide-react";
+import logo from "@/assets/the-hr-hub-favicon.png";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -18,15 +19,20 @@ const Header = () => {
       <nav className="container mx-auto px-6 py-4">
         <div className="flex items-center justify-between">
           {/* Logo Space */}
-          <div className="flex items-center space-x-2">
-            <div className="w-12 h-12 bg-primary rounded-full flex items-center justify-center">
-              <span className="text-primary-foreground font-heading font-bold text-xl">HR</span>
-            </div>
+          <button
+            onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+            className="flex items-center space-x-2 cursor-pointer hover:opacity-80 transition-opacity"
+          >
+            <img
+              src={logo}
+              alt="The HR Hub Logo"
+              className="w-12 h-12 object-contain"
+            />
             <div className="hidden sm:block">
               <h2 className="font-heading font-bold text-lg text-foreground">The HR Hub</h2>
               <p className="text-xs text-muted-foreground">SME Services</p>
             </div>
-          </div>
+          </button>
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-6">
