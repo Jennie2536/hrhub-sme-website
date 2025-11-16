@@ -23,11 +23,11 @@ const Footer = () => {
                 contact@thehrhub.com.ng
               </a>
               <a
-                href="tel:+2349167676044"
+                href="tel:02013309296"
                 className="flex items-center gap-2 text-background/80 hover:text-accent transition-colors"
               >
                 <Phone className="w-5 h-5" />
-                +234 916 767 6044
+                02013309296
               </a>
               <a
                 href="https://wa.me/2349167676044"

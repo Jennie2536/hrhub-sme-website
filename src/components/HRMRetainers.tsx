@@ -10,9 +10,12 @@ import hrmImage from "@/assets/hrm-image.jpeg";
 
 const HRMRetainers = () => {
   const handleDownloadHRM = () => {
-    // HRM brochure coming soon - will be added later
-    alert("HRM Brochure coming soon! We're finalizing the details.");
-    console.log("HRM Brochure - Coming soon!");
+    const link = document.createElement('a');
+    link.href = '/downloads/thehrhub-hrm-brochure.pdf';
+    link.download = 'TheHRHub-HRM-Brochure.pdf';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
   };
 
   const retainers = [

@@ -6,8 +6,8 @@ import recruitmentImage from "@/assets/recruitment-image-3.jpg";
 const RecruitmentServices = () => {
   const handleDownloadRecruitment = () => {
     const link = document.createElement('a');
-    link.href = '/downloads/sme-recruitment-brochure.pdf';
-    link.download = 'SME-Recruitment-Brochure.pdf';
+    link.href = '/downloads/thehrhub-recruitment-brochure.pdf';
+    link.download = 'TheHRHub-Recruitment-Brochure.pdf';
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
