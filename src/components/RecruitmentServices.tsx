@@ -2,9 +2,14 @@ import { Button } from "@/components/ui/button";
 import { CheckCircle2, FileDown } from "lucide-react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import recruitmentImage from "@/assets/recruitment-image-3.jpg";
+import { trackDownload, trackCTAClick } from "@/utils/analytics";
 
 const RecruitmentServices = () => {
   const handleDownloadRecruitment = () => {
+    // Track the download
+    trackDownload('recruitment');
+    trackCTAClick('Download Recruitment Brochure', 'Recruitment Services Section');
+
     const link = document.createElement('a');
     link.href = '/downloads/thehrhub-recruitment-brochure.pdf';
     link.download = 'TheHRHub-Recruitment-Brochure.pdf';

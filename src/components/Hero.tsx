@@ -3,11 +3,16 @@ import { Button } from "@/components/ui/button";
 import { FileDown, Calendar } from "lucide-react";
 import heroImage from "@/assets/hero-image.png";
 import { QuoteModal } from "@/components/QuoteModal";
+import { trackDownload, trackCTAClick } from "@/utils/analytics";
 
 const Hero = () => {
   const [isQuoteModalOpen, setIsQuoteModalOpen] = useState(false);
 
   const handleDownloadRecruitment = () => {
+    // Track the download
+    trackDownload('recruitment');
+    trackCTAClick('Download Recruitment Brochure', 'Hero Section');
+
     const link = document.createElement('a');
     link.href = '/downloads/thehrhub-recruitment-brochure.pdf';
     link.download = 'TheHRHub-Recruitment-Brochure.pdf';
@@ -17,6 +22,10 @@ const Hero = () => {
   };
 
   const handleDownloadHRM = () => {
+    // Track the download
+    trackDownload('hrm');
+    trackCTAClick('Download HRM Brochure', 'Hero Section');
+
     const link = document.createElement('a');
     link.href = '/downloads/thehrhub-hrm-brochure.pdf';
     link.download = 'TheHRHub-HRM-Brochure.pdf';
@@ -26,6 +35,9 @@ const Hero = () => {
   };
 
   const handleRequestQuote = () => {
+    // Track the CTA click
+    trackCTAClick('Request Quote', 'Hero Section');
+
     setIsQuoteModalOpen(true);
   };
 

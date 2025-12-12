@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { X } from 'lucide-react';
 import { submitQuoteRequest } from '../services/airtable';
+import { trackQuoteRequest } from '../utils/analytics';
 
 interface QuoteModalProps {
     isOpen: boolean;
@@ -55,6 +56,9 @@ export const QuoteModal = ({ isOpen, onClose }: QuoteModalProps) => {
                 serviceInterest: formData.serviceInterest,
                 message: formData.message,
             });
+
+            // Track the successful quote request submission
+            trackQuoteRequest(formData.serviceInterest, formData.location);
 
             setIsSubmitting(false);
             setIsSuccess(true);

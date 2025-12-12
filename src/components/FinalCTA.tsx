@@ -2,11 +2,17 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { FileDown, MapPin } from "lucide-react";
 import { QuoteModal } from "@/components/QuoteModal";
+import { trackDownload, trackCTAClick, trackAudienceEngagement } from "@/utils/analytics";
 
 const FinalCTA = () => {
   const [isQuoteModalOpen, setIsQuoteModalOpen] = useState(false);
 
   const handleDownloadRecruitment = () => {
+    // Track Nigeria audience engagement and download
+    trackAudienceEngagement('nigeria');
+    trackDownload('recruitment');
+    trackCTAClick('Download Recruitment Brochure', 'Final CTA - Nigeria');
+
     const link = document.createElement('a');
     link.href = '/downloads/thehrhub-recruitment-brochure.pdf';
     link.download = 'TheHRHub-Recruitment-Brochure.pdf';
@@ -16,6 +22,11 @@ const FinalCTA = () => {
   };
 
   const handleDownloadHRM = () => {
+    // Track Nigeria audience engagement and download
+    trackAudienceEngagement('nigeria');
+    trackDownload('hrm');
+    trackCTAClick('Download HRM Brochure', 'Final CTA - Nigeria');
+
     const link = document.createElement('a');
     link.href = '/downloads/thehrhub-hrm-brochure.pdf';
     link.download = 'TheHRHub-HRM-Brochure.pdf';
@@ -25,6 +36,10 @@ const FinalCTA = () => {
   };
 
   const handleRequestQuote = () => {
+    // Track international audience engagement
+    trackAudienceEngagement('international');
+    trackCTAClick('Request Quote', 'Final CTA - International');
+
     setIsQuoteModalOpen(true);
   };
 
