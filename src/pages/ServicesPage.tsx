@@ -4,7 +4,7 @@ import BookStrategyCall from "@/components/BookStrategyCall";
 import { QuoteModal } from "@/components/QuoteModal";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
-import { CheckCircle2, FileDown, Users, Building2, TrendingUp, Target, ArrowRight, MessageSquare, Zap, Shield, Clock } from "lucide-react";
+import { CheckCircle2, FileDown, Users, Building2, TrendingUp, Target, MessageSquare, ChevronRight } from "lucide-react";
 import recruitmentImage from "@/assets/recruitment-image-3.jpg";
 import hrmImage from "@/assets/hrm-image.jpeg";
 import { trackDownload, trackCTAClick } from "@/utils/analytics";
@@ -44,77 +44,37 @@ const ServicesPage = () => {
         <main className="min-h-screen bg-background">
             <Header />
 
-            {/* Hero Section - Bold & Visual */}
-            <section className="pt-32 pb-20 px-6 bg-gradient-to-br from-primary via-primary/95 to-primary/85 relative overflow-hidden">
-                <div className="absolute inset-0 opacity-10">
-                    <div className="absolute top-20 left-10 w-72 h-72 bg-accent rounded-full blur-3xl"></div>
-                    <div className="absolute bottom-20 right-10 w-96 h-96 bg-secondary rounded-full blur-3xl"></div>
-                </div>
+            {/* Compact Hero */}
+            <section className="pt-28 pb-8 px-6 bg-gradient-to-br from-primary to-primary/90">
+                <div className="container mx-auto max-w-5xl text-center">
+                    <h1 className="text-3xl md:text-5xl font-bold text-primary-foreground mb-4">
+                        Our Services
+                    </h1>
+                    <p className="text-lg md:text-xl text-primary-foreground/90 mb-8">
+                        Expert HR solutions designed for growing SMEs
+                    </p>
 
-                <div className="container mx-auto max-w-6xl relative z-10">
-                    <div className="text-center mb-16">
-                        <h1 className="text-4xl md:text-6xl font-bold text-primary-foreground mb-6 animate-fade-in">
-                            HR Solutions Built for SMEs
-                        </h1>
-                        <p className="text-xl md:text-2xl text-primary-foreground/90 max-w-3xl mx-auto mb-8 animate-slide-up">
-                            Whether you need to hire the right people or manage them effectively—we've got you covered.
-                        </p>
-                    </div>
-
-                    {/* Service Selector Cards - More Visual */}
-                    <div className="grid md:grid-cols-2 gap-6 max-w-4xl mx-auto">
+                    {/* Service Toggle Pills */}
+                    <div className="inline-flex bg-background/10 backdrop-blur-sm rounded-full p-1 gap-1">
                         <button
                             onClick={() => setActiveService('recruitment')}
-                            className={`group relative overflow-hidden rounded-3xl p-8 transition-all duration-300 ${activeService === 'recruitment'
-                                    ? 'bg-background shadow-2xl scale-105'
-                                    : 'bg-background/10 backdrop-blur-sm hover:bg-background/20'
+                            className={`px-6 md:px-8 py-3 rounded-full font-semibold transition-all duration-300 ${activeService === 'recruitment'
+                                ? 'bg-secondary text-secondary-foreground shadow-lg'
+                                : 'text-primary-foreground hover:bg-background/10'
                                 }`}
                         >
-                            <div className="relative z-10">
-                                <div className={`w-16 h-16 rounded-2xl flex items-center justify-center mb-4 ${activeService === 'recruitment' ? 'bg-secondary' : 'bg-primary-foreground/20'
-                                    }`}>
-                                    <Users className={`w-8 h-8 ${activeService === 'recruitment' ? 'text-secondary-foreground' : 'text-primary-foreground'
-                                        }`} />
-                                </div>
-                                <h3 className={`text-2xl font-bold mb-2 ${activeService === 'recruitment' ? 'text-foreground' : 'text-primary-foreground'
-                                    }`}>
-                                    Recruitment Services
-                                </h3>
-                                <p className={`text-sm ${activeService === 'recruitment' ? 'text-muted-foreground' : 'text-primary-foreground/80'
-                                    }`}>
-                                    Find the right talent with transparent, flat-fee pricing
-                                </p>
-                            </div>
-                            {activeService === 'recruitment' && (
-                                <div className="absolute inset-0 bg-gradient-to-br from-secondary/5 to-accent/5 rounded-3xl"></div>
-                            )}
+                            <Users className="w-4 h-4 inline mr-2" />
+                            Recruitment
                         </button>
-
                         <button
                             onClick={() => setActiveService('hrm')}
-                            className={`group relative overflow-hidden rounded-3xl p-8 transition-all duration-300 ${activeService === 'hrm'
-                                    ? 'bg-background shadow-2xl scale-105'
-                                    : 'bg-background/10 backdrop-blur-sm hover:bg-background/20'
+                            className={`px-6 md:px-8 py-3 rounded-full font-semibold transition-all duration-300 ${activeService === 'hrm'
+                                ? 'bg-accent text-accent-foreground shadow-lg'
+                                : 'text-primary-foreground hover:bg-background/10'
                                 }`}
                         >
-                            <div className="relative z-10">
-                                <div className={`w-16 h-16 rounded-2xl flex items-center justify-center mb-4 ${activeService === 'hrm' ? 'bg-accent' : 'bg-primary-foreground/20'
-                                    }`}>
-                                    <Building2 className={`w-8 h-8 ${activeService === 'hrm' ? 'text-accent-foreground' : 'text-primary-foreground'
-                                        }`} />
-                                </div>
-                                <h3 className={`text-2xl font-bold mb-2 ${activeService === 'hrm' ? 'text-foreground' : 'text-primary-foreground'
-                                    }`}>
-                                    HR Management Retainers
-                                </h3>
-                                <p className={`text-sm ${activeService === 'hrm' ? 'text-muted-foreground' : 'text-primary-foreground/80'
-                                    }`}>
-                                    Ongoing HR support that scales with your business
-                                </p>
-                            </div>
-                            {activeService === 'hrm' && (
-                                <div className="absolute inset-0 bg-gradient-to-br from-accent/5 to-primary/5 rounded-3xl"></div>
-                            )}
+                            <Building2 className="w-4 h-4 inline mr-2" />
+                            HR Management
                         </button>
                     </div>
                 </div>
@@ -122,195 +82,170 @@ const ServicesPage = () => {
 
             {/* Recruitment Service */}
             {activeService === 'recruitment' && (
-                <section className="py-16 px-6 animate-fade-in">
-                    <div className="container mx-auto max-w-7xl">
+                <section className="py-12 px-6 animate-fade-in">
+                    <div className="container mx-auto max-w-6xl">
 
-                        {/* Value Props - Visual Grid */}
-                        <div className="grid md:grid-cols-3 gap-6 mb-16">
-                            <div className="bg-card rounded-2xl p-6 border-2 border-border hover:border-secondary/50 transition-all">
-                                <div className="w-12 h-12 bg-secondary/10 rounded-full flex items-center justify-center mb-4">
-                                    <Zap className="w-6 h-6 text-secondary" />
-                                </div>
-                                <h3 className="text-lg font-bold text-foreground mb-2">Fast Hiring</h3>
-                                <p className="text-sm text-muted-foreground">Quality candidates delivered in 7-14 days</p>
-                            </div>
-                            <div className="bg-card rounded-2xl p-6 border-2 border-border hover:border-secondary/50 transition-all">
-                                <div className="w-12 h-12 bg-accent/10 rounded-full flex items-center justify-center mb-4">
-                                    <Shield className="w-6 h-6 text-accent" />
-                                </div>
-                                <h3 className="text-lg font-bold text-foreground mb-2">No Hidden Costs</h3>
-                                <p className="text-sm text-muted-foreground">Transparent flat fees—no surprises</p>
-                            </div>
-                            <div className="bg-card rounded-2xl p-6 border-2 border-border hover:border-secondary/50 transition-all">
-                                <div className="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center mb-4">
-                                    <CheckCircle2 className="w-6 h-6 text-primary" />
-                                </div>
-                                <h3 className="text-lg font-bold text-foreground mb-2">Quality Guarantee</h3>
-                                <p className="text-sm text-muted-foreground">Structured assessments for every hire</p>
-                            </div>
-                        </div>
+                        {/* Service Header with Image */}
+                        <div className="bg-gradient-to-br from-secondary/10 to-secondary/5 rounded-3xl p-6 md:p-10 mb-12 border-2 border-secondary/20">
+                            <div className="grid md:grid-cols-2 gap-8 items-center">
+                                <div>
+                                    <div className="flex items-center gap-2 mb-4">
+                                        <div className="w-10 h-10 bg-secondary rounded-full flex items-center justify-center">
+                                            <Users className="w-5 h-5 text-secondary-foreground" />
+                                        </div>
+                                        <span className="text-sm font-bold text-secondary uppercase tracking-wide">
+                                            Recruitment Services
+                                        </span>
+                                    </div>
+                                    <h2 className="text-2xl md:text-4xl font-bold text-foreground mb-4">
+                                        Transparent Flat-Fee Hiring
+                                    </h2>
+                                    <p className="text-base md:text-lg text-muted-foreground mb-6">
+                                        Stop wasting money on the wrong hires. Get quality candidates fast with pricing you can plan for.
+                                    </p>
 
-                        {/* Hero Image + Description */}
-                        <div className="grid md:grid-cols-2 gap-12 items-center mb-16">
-                            <div className="order-2 md:order-1">
-                                <img
-                                    src={recruitmentImage}
-                                    alt="Recruitment process"
-                                    className="rounded-3xl shadow-2xl w-full"
-                                />
-                            </div>
-                            <div className="order-1 md:order-2">
-                                <div className="inline-block bg-secondary/10 text-secondary px-4 py-2 rounded-full text-sm font-semibold mb-4">
-                                    RECRUITMENT SERVICES
-                                </div>
-                                <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
-                                    Stop Wasting Money on Wrong Hires
-                                </h2>
-                                <p className="text-lg text-muted-foreground mb-6 leading-relaxed">
-                                    The Hiring Desk delivers pre-vetted, quality candidates with pricing designed for SME budgets. No percentage fees. No guesswork. Just transparent, flat-rate recruitment.
-                                </p>
-                                <div className="flex flex-wrap gap-3">
-                                    <Button variant="cta" size="lg" onClick={handleDownloadRecruitment}>
-                                        <FileDown className="mr-2" />
-                                        Download Brochure
-                                    </Button>
-                                    <Button variant="outline" size="lg" onClick={handleRequestQuote}>
-                                        <MessageSquare className="mr-2" />
-                                        Get a Quote
-                                    </Button>
-                                </div>
-                            </div>
-                        </div>
-
-                        {/* Pricing Packages - Premium Cards */}
-                        <div className="mb-12">
-                            <div className="text-center mb-10">
-                                <h3 className="text-3xl font-bold text-foreground mb-3">Choose Your Package</h3>
-                                <p className="text-lg text-muted-foreground">Transparent pricing for every hiring need</p>
-                            </div>
-
-                            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-
-                                <div className="bg-gradient-to-br from-muted/50 to-muted/30 rounded-3xl p-6 border-2 border-border hover:border-primary/40 hover:shadow-xl transition-all group">
-                                    <div className="flex justify-between items-start mb-4">
-                                        <div className="bg-primary/10 px-3 py-1 rounded-full">
-                                            <p className="text-xs font-semibold text-primary">ENTRY LEVEL</p>
+                                    {/* Quick Benefits */}
+                                    <div className="space-y-2 mb-6">
+                                        <div className="flex items-center gap-2 text-sm">
+                                            <CheckCircle2 className="w-4 h-4 text-secondary flex-shrink-0" />
+                                            <span className="text-foreground">7-14 days delivery</span>
+                                        </div>
+                                        <div className="flex items-center gap-2 text-sm">
+                                            <CheckCircle2 className="w-4 h-4 text-secondary flex-shrink-0" />
+                                            <span className="text-foreground">No percentage fees</span>
+                                        </div>
+                                        <div className="flex items-center gap-2 text-sm">
+                                            <CheckCircle2 className="w-4 h-4 text-secondary flex-shrink-0" />
+                                            <span className="text-foreground">Pre-screened candidates</span>
                                         </div>
                                     </div>
-                                    <div className="mb-4">
-                                        <div className="text-4xl font-bold text-primary mb-1">₦160K</div>
-                                        <p className="text-sm text-muted-foreground">per hire</p>
+
+                                    <div className="flex flex-wrap gap-3">
+                                        <Button variant="cta" onClick={handleDownloadRecruitment}>
+                                            <FileDown className="mr-2 w-4 h-4" />
+                                            Download Brochure
+                                        </Button>
+                                        <Button variant="outline" onClick={handleRequestQuote}>
+                                            <MessageSquare className="mr-2 w-4 h-4" />
+                                            Get Quote
+                                        </Button>
                                     </div>
-                                    <p className="text-sm font-semibold text-foreground mb-3">Perfect for:</p>
-                                    <p className="text-sm text-muted-foreground mb-4 leading-relaxed">
-                                        Interns, frontline staff, call-centre reps, customer service officers
-                                    </p>
-                                    <div className="pt-4 border-t border-border">
-                                        <p className="text-xs text-muted-foreground">1–5 hires/month</p>
+                                </div>
+                                <div className="order-first md:order-last">
+                                    <img
+                                        src={recruitmentImage}
+                                        alt="Recruitment"
+                                        className="rounded-2xl shadow-xl w-full"
+                                        loading="eager"
+                                        fetchPriority="high"
+                                        width="600"
+                                        height="400"
+                                    />
+                                </div>
+                            </div>
+                        </div>
+
+                        {/* Pricing Tiers - Simplified */}
+                        <div className="mb-12">
+                            <h3 className="text-2xl font-bold text-foreground mb-6 text-center">Pricing Plans</h3>
+
+                            <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                                {/* Entry Level */}
+                                <div className="bg-card rounded-2xl p-5 border-2 border-border hover:border-secondary/30 hover:shadow-lg transition-all">
+                                    <div className="text-sm font-bold text-secondary mb-2">ENTRY LEVEL</div>
+                                    <div className="text-3xl font-bold text-primary mb-1">₦160K</div>
+                                    <div className="text-xs text-muted-foreground mb-3">per hire</div>
+                                    <div className="text-sm text-foreground mb-3">
+                                        Interns, frontline staff, customer service
+                                    </div>
+                                    <div className="text-xs text-muted-foreground pt-3 border-t border-border">
+                                        1–5 hires/month
                                     </div>
                                 </div>
 
-                                <div className="bg-gradient-to-br from-secondary/10 to-secondary/5 rounded-3xl p-6 border-2 border-secondary hover:shadow-2xl transition-all group relative">
-                                    <div className="absolute -top-3 -right-3 bg-secondary text-secondary-foreground text-xs font-bold px-4 py-2 rounded-full shadow-lg">
+                                {/* Junior */}
+                                <div className="bg-gradient-to-br from-secondary/10 to-secondary/5 rounded-2xl p-5 border-2 border-secondary relative hover:shadow-xl transition-all">
+                                    <div className="absolute -top-2 -right-2 bg-secondary text-secondary-foreground text-xs font-bold px-3 py-1 rounded-full">
                                         POPULAR
                                     </div>
-                                    <div className="flex justify-between items-start mb-4">
-                                        <div className="bg-secondary/20 px-3 py-1 rounded-full">
-                                            <p className="text-xs font-semibold text-secondary">JUNIOR ROLES</p>
-                                        </div>
+                                    <div className="text-sm font-bold text-secondary mb-2">JUNIOR ROLES</div>
+                                    <div className="text-3xl font-bold text-primary mb-1">₦220K</div>
+                                    <div className="text-xs text-muted-foreground mb-3">per hire</div>
+                                    <div className="text-sm text-foreground mb-3">
+                                        Sales reps, admins, junior accountants
                                     </div>
-                                    <div className="mb-4">
-                                        <div className="text-4xl font-bold text-primary mb-1">₦220K</div>
-                                        <p className="text-sm text-muted-foreground">per hire</p>
-                                    </div>
-                                    <p className="text-sm font-semibold text-foreground mb-3">Perfect for:</p>
-                                    <p className="text-sm text-muted-foreground mb-4 leading-relaxed">
-                                        Sales reps, admins, junior accountants, HR assistants (1–3 years exp)
-                                    </p>
-                                    <div className="pt-4 border-t border-border">
-                                        <p className="text-xs text-muted-foreground">2–4 hires/month</p>
+                                    <div className="text-xs text-muted-foreground pt-3 border-t border-border">
+                                        2–4 hires/month
                                     </div>
                                 </div>
 
-                                <div className="bg-gradient-to-br from-accent/10 to-accent/5 rounded-3xl p-6 border-2 border-border hover:border-accent/40 hover:shadow-xl transition-all group">
-                                    <div className="flex justify-between items-start mb-4">
-                                        <div className="bg-accent/20 px-3 py-1 rounded-full">
-                                            <p className="text-xs font-semibold text-accent-foreground">MID-LEVEL</p>
-                                        </div>
+                                {/* Mid Level */}
+                                <div className="bg-card rounded-2xl p-5 border-2 border-border hover:border-secondary/30 hover:shadow-lg transition-all">
+                                    <div className="text-sm font-bold text-secondary mb-2">MID-LEVEL</div>
+                                    <div className="text-3xl font-bold text-primary mb-1">₦350K</div>
+                                    <div className="text-xs text-muted-foreground mb-3">per hire</div>
+                                    <div className="text-sm text-foreground mb-3">
+                                        Supervisors, team leads, specialists
                                     </div>
-                                    <div className="mb-4">
-                                        <div className="text-4xl font-bold text-primary mb-1">₦350K</div>
-                                        <p className="text-sm text-muted-foreground">per hire</p>
-                                    </div>
-                                    <p className="text-sm font-semibold text-foreground mb-3">Perfect for:</p>
-                                    <p className="text-sm text-muted-foreground mb-4 leading-relaxed">
-                                        Supervisors, team leads, office managers, HR officers, specialists
-                                    </p>
-                                    <div className="pt-4 border-t border-border">
-                                        <p className="text-xs text-muted-foreground">1–3 hires/month</p>
+                                    <div className="text-xs text-muted-foreground pt-3 border-t border-border">
+                                        1–3 hires/month
                                     </div>
                                 </div>
 
-                                <div className="bg-gradient-to-br from-primary/15 to-primary/5 rounded-3xl p-6 border-2 border-border hover:border-primary/40 hover:shadow-xl transition-all group">
-                                    <div className="flex justify-between items-start mb-4">
-                                        <div className="bg-primary/20 px-3 py-1 rounded-full">
-                                            <p className="text-xs font-semibold text-primary">TECH TALENT</p>
-                                        </div>
+                                {/* Tech */}
+                                <div className="bg-card rounded-2xl p-5 border-2 border-border hover:border-secondary/30 hover:shadow-lg transition-all">
+                                    <div className="text-sm font-bold text-secondary mb-2">TECH TALENT</div>
+                                    <div className="text-3xl font-bold text-primary mb-1">8%</div>
+                                    <div className="text-xs text-muted-foreground mb-3">of annual salary</div>
+                                    <div className="text-sm text-foreground mb-3">
+                                        Engineers, product managers, DevOps
                                     </div>
-                                    <div className="mb-4">
-                                        <div className="text-4xl font-bold text-primary mb-1">From 8%</div>
-                                        <p className="text-sm text-muted-foreground">of annual salary</p>
-                                    </div>
-                                    <p className="text-sm font-semibold text-foreground mb-3">Perfect for:</p>
-                                    <p className="text-sm text-muted-foreground mb-4 leading-relaxed">
-                                        Engineers, product managers, DevOps, data analysts
-                                    </p>
-                                    <div className="pt-4 border-t border-border">
-                                        <p className="text-xs text-muted-foreground">Specialist track</p>
+                                    <div className="text-xs text-muted-foreground pt-3 border-t border-border">
+                                        Specialist track
                                     </div>
                                 </div>
                             </div>
                         </div>
 
-                        {/* Social Proof / Process */}
-                        <div className="bg-gradient-to-r from-primary/5 to-accent/5 rounded-3xl p-8 md:p-12 mb-12">
-                            <h3 className="text-2xl font-bold text-foreground mb-8 text-center">How It Works</h3>
-                            <div className="grid md:grid-cols-3 gap-8">
+                        {/* How It Works */}
+                        <div className="bg-gradient-to-r from-secondary/5 to-accent/5 rounded-2xl p-6 md:p-8 mb-8">
+                            <h3 className="text-xl font-bold text-foreground mb-6 text-center">How It Works</h3>
+                            <div className="grid md:grid-cols-3 gap-6">
                                 <div className="text-center">
-                                    <div className="w-16 h-16 bg-primary rounded-full flex items-center justify-center mx-auto mb-4 text-2xl font-bold text-primary-foreground">
+                                    <div className="w-12 h-12 bg-secondary rounded-full flex items-center justify-center mx-auto mb-3 text-lg font-bold text-secondary-foreground">
                                         1
                                     </div>
-                                    <h4 className="font-bold text-foreground mb-2">Tell Us Your Needs</h4>
-                                    <p className="text-sm text-muted-foreground">Share your hiring requirements and timeline</p>
+                                    <h4 className="font-semibold text-foreground mb-1 text-sm">Share Your Needs</h4>
+                                    <p className="text-xs text-muted-foreground">Tell us your requirements</p>
                                 </div>
                                 <div className="text-center">
-                                    <div className="w-16 h-16 bg-secondary rounded-full flex items-center justify-center mx-auto mb-4 text-2xl font-bold text-secondary-foreground">
+                                    <div className="w-12 h-12 bg-secondary rounded-full flex items-center justify-center mx-auto mb-3 text-lg font-bold text-secondary-foreground">
                                         2
                                     </div>
-                                    <h4 className="font-bold text-foreground mb-2">We Find Quality Candidates</h4>
-                                    <p className="text-sm text-muted-foreground">Pre-screened, assessed, and ready for interviews</p>
+                                    <h4 className="font-semibold text-foreground mb-1 text-sm">We Find Candidates</h4>
+                                    <p className="text-xs text-muted-foreground">Pre-screened and assessed</p>
                                 </div>
                                 <div className="text-center">
-                                    <div className="w-16 h-16 bg-accent rounded-full flex items-center justify-center mx-auto mb-4 text-2xl font-bold text-accent-foreground">
+                                    <div className="w-12 h-12 bg-secondary rounded-full flex items-center justify-center mx-auto mb-3 text-lg font-bold text-secondary-foreground">
                                         3
                                     </div>
-                                    <h4 className="font-bold text-foreground mb-2">You Make the Hire</h4>
-                                    <p className="text-sm text-muted-foreground">We support onboarding and integration</p>
+                                    <h4 className="font-semibold text-foreground mb-1 text-sm">You Make the Hire</h4>
+                                    <p className="text-xs text-muted-foreground">With onboarding support</p>
                                 </div>
                             </div>
                         </div>
 
                         {/* Final CTA */}
                         <div className="text-center">
-                            <p className="text-lg text-muted-foreground mb-6">Ready to build your team?</p>
-                            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                            <p className="text-muted-foreground mb-4">Ready to build your team?</p>
+                            <div className="flex flex-col sm:flex-row gap-3 justify-center">
                                 <Button variant="cta" size="lg" onClick={handleDownloadRecruitment}>
                                     <FileDown className="mr-2" />
                                     Download Full Brochure
                                 </Button>
                                 <Button variant="outline" size="lg" onClick={handleRequestQuote}>
                                     <MessageSquare className="mr-2" />
-                                    Request a Custom Quote
+                                    Request Custom Quote
                                 </Button>
                             </div>
                         </div>
@@ -320,217 +255,209 @@ const ServicesPage = () => {
 
             {/* HRM Service */}
             {activeService === 'hrm' && (
-                <section className="py-16 px-6 animate-fade-in">
-                    <div className="container mx-auto max-w-7xl">
+                <section className="py-12 px-6 animate-fade-in">
+                    <div className="container mx-auto max-w-6xl">
 
-                        {/* Value Props */}
-                        <div className="grid md:grid-cols-3 gap-6 mb-16">
-                            <div className="bg-card rounded-2xl p-6 border-2 border-border hover:border-accent/50 transition-all">
-                                <div className="w-12 h-12 bg-accent/10 rounded-full flex items-center justify-center mb-4">
-                                    <TrendingUp className="w-6 h-6 text-accent" />
+                        {/* Service Header with Image */}
+                        <div className="bg-gradient-to-br from-accent/10 to-accent/5 rounded-3xl p-6 md:p-10 mb-12 border-2 border-accent/20">
+                            <div className="grid md:grid-cols-2 gap-8 items-center">
+                                <div>
+                                    <img
+                                        src={hrmImage}
+                                        alt="HR Management"
+                                        className="rounded-2xl shadow-xl w-full"
+                                        loading="lazy"
+                                        width="600"
+                                        height="400"
+                                    />
                                 </div>
-                                <h3 className="text-lg font-bold text-foreground mb-2">Scalable Support</h3>
-                                <p className="text-sm text-muted-foreground">Grows with you from 2 to 120+ employees</p>
-                            </div>
-                            <div className="bg-card rounded-2xl p-6 border-2 border-border hover:border-accent/50 transition-all">
-                                <div className="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center mb-4">
-                                    <Clock className="w-6 h-6 text-primary" />
+                                <div>
+                                    <div className="flex items-center gap-2 mb-4">
+                                        <div className="w-10 h-10 bg-accent rounded-full flex items-center justify-center">
+                                            <Building2 className="w-5 h-5 text-accent-foreground" />
+                                        </div>
+                                        <span className="text-sm font-bold text-accent-foreground uppercase tracking-wide">
+                                            HR Management Retainers
+                                        </span>
+                                    </div>
+                                    <h2 className="text-2xl md:text-4xl font-bold text-foreground mb-4">
+                                        Scalable HR Support
+                                    </h2>
+                                    <p className="text-base md:text-lg text-muted-foreground mb-6">
+                                        Get fractional HR that grows with you—from 2 to 120+ employees with transparent per-employee pricing.
+                                    </p>
+
+                                    {/* Quick Benefits */}
+                                    <div className="space-y-2 mb-6">
+                                        <div className="flex items-center gap-2 text-sm">
+                                            <CheckCircle2 className="w-4 h-4 text-accent flex-shrink-0" />
+                                            <span className="text-foreground">2-5 days/week presence</span>
+                                        </div>
+                                        <div className="flex items-center gap-2 text-sm">
+                                            <CheckCircle2 className="w-4 h-4 text-accent flex-shrink-0" />
+                                            <span className="text-foreground">Full compliance coverage</span>
+                                        </div>
+                                        <div className="flex items-center gap-2 text-sm">
+                                            <CheckCircle2 className="w-4 h-4 text-accent flex-shrink-0" />
+                                            <span className="text-foreground">Strategic HR planning</span>
+                                        </div>
+                                    </div>
+
+                                    <div className="flex flex-wrap gap-3">
+                                        <Button variant="cta" onClick={handleDownloadHRM}>
+                                            <FileDown className="mr-2 w-4 h-4" />
+                                            Download Brochure
+                                        </Button>
+                                        <Button variant="outline" onClick={handleRequestQuote}>
+                                            <MessageSquare className="mr-2 w-4 h-4" />
+                                            Get Quote
+                                        </Button>
+                                    </div>
                                 </div>
-                                <h3 className="text-lg font-bold text-foreground mb-2">Weekly Presence</h3>
-                                <p className="text-sm text-muted-foreground">Regular HR support (2-5 days/week)</p>
-                            </div>
-                            <div className="bg-card rounded-2xl p-6 border-2 border-border hover:border-accent/50 transition-all">
-                                <div className="w-12 h-12 bg-secondary/10 rounded-full flex items-center justify-center mb-4">
-                                    <Shield className="w-6 h-6 text-secondary" />
-                                </div>
-                                <h3 className="text-lg font-bold text-foreground mb-2">Full Compliance</h3>
-                                <p className="text-sm text-muted-foreground">Stay compliant with Nigerian labor laws</p>
                             </div>
                         </div>
 
-                        {/* Hero Image + Description */}
-                        <div className="grid md:grid-cols-2 gap-12 items-center mb-16">
-                            <div>
-                                <div className="inline-block bg-accent/10 text-accent-foreground px-4 py-2 rounded-full text-sm font-semibold mb-4">
-                                    HR MANAGEMENT RETAINERS
-                                </div>
-                                <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
-                                    Your Business Grew. Your HR Should Too.
-                                </h2>
-                                <p className="text-lg text-muted-foreground mb-6 leading-relaxed">
-                                    Get fractional HR support that scales with your team. From basic compliance to strategic people management—we cover it all with transparent, per-employee pricing.
-                                </p>
-                                <div className="flex flex-wrap gap-3">
-                                    <Button variant="cta" size="lg" onClick={handleDownloadHRM}>
-                                        <FileDown className="mr-2" />
-                                        Download Brochure
-                                    </Button>
-                                    <Button variant="outline" size="lg" onClick={handleRequestQuote}>
-                                        <MessageSquare className="mr-2" />
-                                        Get a Quote
-                                    </Button>
-                                </div>
-                            </div>
-                            <div>
-                                <img
-                                    src={hrmImage}
-                                    alt="HR management"
-                                    className="rounded-3xl shadow-2xl w-full"
-                                />
-                            </div>
-                        </div>
-
-                        {/* Retainer Tiers - Premium Design */}
+                        {/* HR Tiers - Simplified Cards */}
                         <div className="mb-12">
-                            <div className="text-center mb-10">
-                                <h3 className="text-3xl font-bold text-foreground mb-3">Choose Your HR Tier</h3>
-                                <p className="text-lg text-muted-foreground">Flexible retainers based on team size</p>
-                            </div>
+                            <h3 className="text-2xl font-bold text-foreground mb-6 text-center">Choose Your Tier</h3>
 
-                            <div className="space-y-6">
-
-                                {/* Starter HR */}
-                                <div className="bg-gradient-to-r from-primary/5 via-background to-background rounded-3xl p-6 md:p-8 border-2 border-border hover:border-primary/30 hover:shadow-lg transition-all group">
-                                    <div className="flex flex-col lg:flex-row lg:items-center gap-6">
-                                        <div className="lg:w-20 flex-shrink-0">
-                                            <div className="w-16 h-16 bg-primary/10 rounded-2xl flex items-center justify-center">
-                                                <Users className="w-8 h-8 text-primary" />
+                            <div className="space-y-4">
+                                {/* Starter */}
+                                <div className="bg-card rounded-2xl p-5 border-2 border-border hover:border-accent/30 hover:shadow-lg transition-all">
+                                    <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+                                        <div className="flex items-start gap-4">
+                                            <div className="w-12 h-12 bg-accent/10 rounded-xl flex items-center justify-center flex-shrink-0">
+                                                <Users className="w-6 h-6 text-accent" />
+                                            </div>
+                                            <div className="flex-1">
+                                                <div className="flex items-center gap-2 mb-1">
+                                                    <h4 className="text-lg font-bold text-foreground">Starter HR</h4>
+                                                    <span className="bg-accent/10 text-accent-foreground px-2 py-0.5 rounded-full text-xs font-semibold">
+                                                        2-10 STAFF
+                                                    </span>
+                                                </div>
+                                                <p className="text-sm text-muted-foreground mb-2">2 days/week</p>
+                                                <p className="text-sm text-foreground">
+                                                    HR setup, compliance, employee records
+                                                </p>
                                             </div>
                                         </div>
-                                        <div className="flex-1">
-                                            <div className="flex flex-wrap items-center gap-3 mb-2">
-                                                <h4 className="text-2xl font-bold text-foreground">Starter HR</h4>
-                                                <span className="bg-primary/10 text-primary px-3 py-1 rounded-full text-xs font-semibold">
-                                                    2-10 STAFF
-                                                </span>
-                                            </div>
-                                            <p className="text-sm text-muted-foreground mb-3">2 days/week presence</p>
-                                            <p className="text-sm text-foreground">
-                                                HR setup, employee records, starter policy, compliance cover, urgent staff issues
-                                            </p>
-                                        </div>
-                                        <div className="lg:text-right lg:min-w-[200px]">
-                                            <div className="text-3xl md:text-4xl font-bold text-primary mb-1">From ₦100K</div>
-                                            <p className="text-sm text-muted-foreground">/month + ₦10K per extra employee</p>
+                                        <div className="md:text-right md:min-w-[140px]">
+                                            <div className="text-2xl md:text-3xl font-bold text-primary">₦100K+</div>
+                                            <p className="text-xs text-muted-foreground">/month</p>
                                         </div>
                                     </div>
                                 </div>
 
-                                {/* Growth HR */}
-                                <div className="bg-gradient-to-r from-secondary/5 via-background to-background rounded-3xl p-6 md:p-8 border-2 border-secondary hover:shadow-2xl transition-all group relative">
-                                    <div className="absolute -top-4 left-8 bg-secondary text-secondary-foreground px-4 py-2 rounded-full text-sm font-bold shadow-lg">
-                                        ⭐ RECOMMENDED
+                                {/* Growth */}
+                                <div className="bg-gradient-to-r from-accent/10 to-accent/5 rounded-2xl p-5 border-2 border-accent hover:shadow-xl transition-all relative">
+                                    <div className="absolute -top-2 -right-2 bg-accent text-accent-foreground text-xs font-bold px-3 py-1 rounded-full">
+                                        RECOMMENDED
                                     </div>
-                                    <div className="flex flex-col lg:flex-row lg:items-center gap-6">
-                                        <div className="lg:w-20 flex-shrink-0">
-                                            <div className="w-16 h-16 bg-secondary/10 rounded-2xl flex items-center justify-center">
-                                                <Building2 className="w-8 h-8 text-secondary" />
+                                    <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+                                        <div className="flex items-start gap-4">
+                                            <div className="w-12 h-12 bg-accent/20 rounded-xl flex items-center justify-center flex-shrink-0">
+                                                <Building2 className="w-6 h-6 text-accent-foreground" />
+                                            </div>
+                                            <div className="flex-1">
+                                                <div className="flex items-center gap-2 mb-1">
+                                                    <h4 className="text-lg font-bold text-foreground">Growth HR</h4>
+                                                    <span className="bg-accent/10 text-accent-foreground px-2 py-0.5 rounded-full text-xs font-semibold">
+                                                        10-30 STAFF
+                                                    </span>
+                                                </div>
+                                                <p className="text-sm text-muted-foreground mb-2">3 days/week</p>
+                                                <p className="text-sm text-foreground">
+                                                    All Starter + hiring, payroll, performance
+                                                </p>
                                             </div>
                                         </div>
-                                        <div className="flex-1">
-                                            <div className="flex flex-wrap items-center gap-3 mb-2">
-                                                <h4 className="text-2xl font-bold text-foreground">Growth HR</h4>
-                                                <span className="bg-secondary/10 text-secondary px-3 py-1 rounded-full text-xs font-semibold">
-                                                    10-30 STAFF
-                                                </span>
-                                            </div>
-                                            <p className="text-sm text-muted-foreground mb-3">3 days/week presence</p>
-                                            <p className="text-sm text-foreground">
-                                                All Starter features + HR admin, compliance manuals, hiring support, employee relations, payroll oversight, performance check-ins
-                                            </p>
-                                        </div>
-                                        <div className="lg:text-right lg:min-w-[200px]">
-                                            <div className="text-3xl md:text-4xl font-bold text-primary mb-1">₦16.5K–₦25K</div>
-                                            <p className="text-sm text-muted-foreground">/employee/month</p>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                {/* Advanced HR */}
-                                <div className="bg-gradient-to-r from-accent/5 via-background to-background rounded-3xl p-6 md:p-8 border-2 border-border hover:border-accent/30 hover:shadow-lg transition-all group">
-                                    <div className="flex flex-col lg:flex-row lg:items-center gap-6">
-                                        <div className="lg:w-20 flex-shrink-0">
-                                            <div className="w-16 h-16 bg-accent/10 rounded-2xl flex items-center justify-center">
-                                                <TrendingUp className="w-8 h-8 text-accent" />
-                                            </div>
-                                        </div>
-                                        <div className="flex-1">
-                                            <div className="flex flex-wrap items-center gap-3 mb-2">
-                                                <h4 className="text-2xl font-bold text-foreground">Advanced HR</h4>
-                                                <span className="bg-accent/10 text-accent-foreground px-3 py-1 rounded-full text-xs font-semibold">
-                                                    30-60 STAFF
-                                                </span>
-                                            </div>
-                                            <p className="text-sm text-muted-foreground mb-3">4 days/week (almost embedded)</p>
-                                            <p className="text-sm text-foreground">
-                                                All Growth features + recruitment coordination, training programs, HR automation, performance management, quarterly reports
-                                            </p>
-                                        </div>
-                                        <div className="lg:text-right lg:min-w-[200px]">
-                                            <div className="text-3xl md:text-4xl font-bold text-primary mb-1">₦20.5K–₦30K</div>
-                                            <p className="text-sm text-muted-foreground">/employee/month</p>
+                                        <div className="md:text-right md:min-w-[140px]">
+                                            <div className="text-2xl md:text-3xl font-bold text-primary">₦16.5K–25K</div>
+                                            <p className="text-xs text-muted-foreground">/employee/mo</p>
                                         </div>
                                     </div>
                                 </div>
 
-                                {/* Strategic HR */}
-                                <div className="bg-gradient-to-r from-primary/10 via-background to-background rounded-3xl p-6 md:p-8 border-2 border-border hover:border-primary/30 hover:shadow-lg transition-all group">
-                                    <div className="flex flex-col lg:flex-row lg:items-center gap-6">
-                                        <div className="lg:w-20 flex-shrink-0">
-                                            <div className="w-16 h-16 bg-primary/10 rounded-2xl flex items-center justify-center">
-                                                <Target className="w-8 h-8 text-primary" />
+                                {/* Advanced */}
+                                <div className="bg-card rounded-2xl p-5 border-2 border-border hover:border-accent/30 hover:shadow-lg transition-all">
+                                    <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+                                        <div className="flex items-start gap-4">
+                                            <div className="w-12 h-12 bg-accent/10 rounded-xl flex items-center justify-center flex-shrink-0">
+                                                <TrendingUp className="w-6 h-6 text-accent" />
+                                            </div>
+                                            <div className="flex-1">
+                                                <div className="flex items-center gap-2 mb-1">
+                                                    <h4 className="text-lg font-bold text-foreground">Advanced HR</h4>
+                                                    <span className="bg-accent/10 text-accent-foreground px-2 py-0.5 rounded-full text-xs font-semibold">
+                                                        30-60 STAFF
+                                                    </span>
+                                                </div>
+                                                <p className="text-sm text-muted-foreground mb-2">4 days/week</p>
+                                                <p className="text-sm text-foreground">
+                                                    All Growth + training, automation, reports
+                                                </p>
                                             </div>
                                         </div>
-                                        <div className="flex-1">
-                                            <div className="flex flex-wrap items-center gap-3 mb-2">
-                                                <h4 className="text-2xl font-bold text-foreground">Strategic HR</h4>
-                                                <span className="bg-primary/10 text-primary px-3 py-1 rounded-full text-xs font-semibold">
-                                                    60+ STAFF
-                                                </span>
-                                            </div>
-                                            <p className="text-sm text-muted-foreground mb-3">4-5 days/week (customized, embedded)</p>
-                                            <p className="text-sm text-foreground">
-                                                All Advanced features + people strategy, succession planning, engagement programs, crisis management, workforce analytics
-                                            </p>
+                                        <div className="md:text-right md:min-w-[140px]">
+                                            <div className="text-2xl md:text-3xl font-bold text-primary">₦20.5K–30K</div>
+                                            <p className="text-xs text-muted-foreground">/employee/mo</p>
                                         </div>
-                                        <div className="lg:text-right lg:min-w-[200px]">
-                                            <div className="text-3xl md:text-4xl font-bold text-primary mb-1">₦25.5K–₦30K+</div>
-                                            <p className="text-sm text-muted-foreground">/employee/month</p>
+                                    </div>
+                                </div>
+
+                                {/* Strategic */}
+                                <div className="bg-card rounded-2xl p-5 border-2 border-border hover:border-accent/30 hover:shadow-lg transition-all">
+                                    <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+                                        <div className="flex items-start gap-4">
+                                            <div className="w-12 h-12 bg-accent/10 rounded-xl flex items-center justify-center flex-shrink-0">
+                                                <Target className="w-6 h-6 text-accent" />
+                                            </div>
+                                            <div className="flex-1">
+                                                <div className="flex items-center gap-2 mb-1">
+                                                    <h4 className="text-lg font-bold text-foreground">Strategic HR</h4>
+                                                    <span className="bg-accent/10 text-accent-foreground px-2 py-0.5 rounded-full text-xs font-semibold">
+                                                        60+ STAFF
+                                                    </span>
+                                                </div>
+                                                <p className="text-sm text-muted-foreground mb-2">4-5 days/week</p>
+                                                <p className="text-sm text-foreground">
+                                                    All Advanced + strategy, succession, analytics
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <div className="md:text-right md:min-w-[140px]">
+                                            <div className="text-2xl md:text-3xl font-bold text-primary">₦25.5K–30K+</div>
+                                            <p className="text-xs text-muted-foreground">/employee/mo</p>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
 
-                        {/* Add-ons Section */}
-                        <div className="bg-gradient-to-br from-muted/50 to-muted/30 rounded-3xl p-8 md:p-10 mb-12">
-                            <h3 className="text-xl font-bold text-foreground mb-6 text-center">Enhance Your Retainer</h3>
-                            <div className="grid md:grid-cols-3 gap-6">
-                                <div className="bg-background rounded-2xl p-6 border border-border">
-                                    <div className="flex items-start gap-3">
-                                        <ArrowRight className="w-5 h-5 text-secondary mt-0.5 flex-shrink-0" />
-                                        <div>
-                                            <h4 className="font-semibold text-foreground mb-1">Payroll Administration</h4>
-                                            <p className="text-sm text-muted-foreground">₦35K setup + per employee fee</p>
-                                        </div>
+                        {/* Add-ons */}
+                        <div className="bg-gradient-to-r from-accent/5 to-muted/30 rounded-2xl p-6 mb-8 border border-accent/20">
+                            <h3 className="text-lg font-bold text-foreground mb-4">Add-on Services</h3>
+                            <div className="grid md:grid-cols-3 gap-4">
+                                <div className="flex items-start gap-2">
+                                    <ChevronRight className="w-4 h-4 text-accent mt-0.5 flex-shrink-0" />
+                                    <div>
+                                        <p className="font-semibold text-foreground text-sm">Payroll</p>
+                                        <p className="text-xs text-muted-foreground">₦35K setup + fees</p>
                                     </div>
                                 </div>
-                                <div className="bg-background rounded-2xl p-6 border border-border">
-                                    <div className="flex items-start gap-3">
-                                        <ArrowRight className="w-5 h-5 text-secondary mt-0.5 flex-shrink-0" />
-                                        <div>
-                                            <h4 className="font-semibold text-foreground mb-1">Custom Training</h4>
-                                            <p className="text-sm text-muted-foreground">On-demand training sessions (flat fees)</p>
-                                        </div>
+                                <div className="flex items-start gap-2">
+                                    <ChevronRight className="w-4 h-4 text-accent mt-0.5 flex-shrink-0" />
+                                    <div>
+                                        <p className="font-semibold text-foreground text-sm">Training</p>
+                                        <p className="text-xs text-muted-foreground">On-demand sessions</p>
                                     </div>
                                 </div>
-                                <div className="bg-background rounded-2xl p-6 border border-border">
-                                    <div className="flex items-start gap-3">
-                                        <ArrowRight className="w-5 h-5 text-secondary mt-0.5 flex-shrink-0" />
-                                        <div>
-                                            <h4 className="font-semibold text-foreground mb-1">HRM + Recruitment Bundle</h4>
-                                            <p className="text-sm text-muted-foreground">Discounted hires for retainer clients</p>
-                                        </div>
+                                <div className="flex items-start gap-2">
+                                    <ChevronRight className="w-4 h-4 text-accent mt-0.5 flex-shrink-0" />
+                                    <div>
+                                        <p className="font-semibold text-foreground text-sm">Bundles</p>
+                                        <p className="text-xs text-muted-foreground">HRM + Recruitment</p>
                                     </div>
                                 </div>
                             </div>
@@ -538,15 +465,15 @@ const ServicesPage = () => {
 
                         {/* Final CTA */}
                         <div className="text-center">
-                            <p className="text-lg text-muted-foreground mb-6">Ready to strengthen your HR foundation?</p>
-                            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                            <p className="text-muted-foreground mb-4">Ready to strengthen your HR?</p>
+                            <div className="flex flex-col sm:flex-row gap-3 justify-center">
                                 <Button variant="cta" size="lg" onClick={handleDownloadHRM}>
                                     <FileDown className="mr-2" />
                                     Download Full Brochure
                                 </Button>
                                 <Button variant="outline" size="lg" onClick={handleRequestQuote}>
                                     <MessageSquare className="mr-2" />
-                                    Request a Custom Quote
+                                    Request Custom Quote
                                 </Button>
                             </div>
                         </div>
@@ -554,7 +481,7 @@ const ServicesPage = () => {
                 </section>
             )}
 
-            {/* Book Strategy Call Section */}
+            {/* Book Strategy Call */}
             <BookStrategyCall />
 
             {/* Quote Modal */}

@@ -94,7 +94,7 @@ const BookStrategyCall = () => {
         <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-6">
           Ready to Transform Your HR?
         </h2>
-        <p className="text-xl text-muted-foreground mb-8 max-w-2xl mx-auto">
+        <p className="text-xl text-white mb-8 max-w-2xl mx-auto">
           Book a free 30-minute strategy call with our HR experts. We'll analyze your needs and show you exactly how we can help.
         </p>
 
