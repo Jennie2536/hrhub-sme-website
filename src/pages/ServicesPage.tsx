@@ -3,19 +3,53 @@ import Footer from "@/components/Footer";
 import BookStrategyCall from "@/components/BookStrategyCall";
 import { QuoteModal } from "@/components/QuoteModal";
 import { Button } from "@/components/ui/button";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { CheckCircle2, FileDown, Users, Building2, TrendingUp, Target, MessageSquare, ChevronRight } from "lucide-react";
 import recruitmentImage from "@/assets/recruitment-image-3.jpg";
 import hrmImage from "@/assets/hrm-image.jpeg";
-import { trackDownload, trackCTAClick } from "@/utils/analytics";
+import {
+    trackDownload,
+    trackCTAClick,
+    trackServiceSelection,
+    trackPricingView,
+    trackModalInteraction,
+    trackJourneyMilestone
+} from "@/utils/analytics";
+import { useVisibilityTracking } from "@/hooks/useVisibilityTracking";
 
 const ServicesPage = () => {
     const [activeService, setActiveService] = useState<'recruitment' | 'hrm'>('recruitment');
     const [isQuoteModalOpen, setIsQuoteModalOpen] = useState(false);
 
+    // Enable comprehensive tracking for this page
+    useVisibilityTracking({
+        pageName: 'Services Page',
+        trackScroll: true,
+        trackTime: true,
+        trackSections: true
+    });
+
+    // Track initial page load and service preference
+    useEffect(() => {
+        trackJourneyMilestone('Visited Services Page');
+    }, []);
+
+    // Track service selection with analytics
+    const handleServiceToggle = (service: 'recruitment' | 'hrm') => {
+        setActiveService(service);
+        trackServiceSelection(service);
+
+        // Track milestone when user explores both services
+        if (service === 'hrm' && activeService === 'recruitment') {
+            trackJourneyMilestone('Explored Both Services');
+        }
+    };
+
     const handleDownloadRecruitment = () => {
         trackDownload('recruitment');
-        trackCTAClick('Download Recruitment Brochure', 'Services Page');
+        trackCTAClick('Download Recruitment Brochure', 'Services Page - Recruitment Section');
+        trackJourneyMilestone('Downloaded Recruitment Brochure');
+
         const link = document.createElement('a');
         link.href = '/downloads/thehrhub-recruitment-brochure.pdf';
         link.download = 'TheHRHub-Recruitment-Brochure.pdf';
@@ -26,7 +60,9 @@ const ServicesPage = () => {
 
     const handleDownloadHRM = () => {
         trackDownload('hrm');
-        trackCTAClick('Download HRM Brochure', 'Services Page');
+        trackCTAClick('Download HRM Brochure', 'Services Page - HRM Section');
+        trackJourneyMilestone('Downloaded HRM Brochure');
+
         const link = document.createElement('a');
         link.href = '/downloads/thehrhub-hrm-brochure.pdf';
         link.download = 'TheHRHub-HRM-Brochure.pdf';
@@ -36,16 +72,31 @@ const ServicesPage = () => {
     };
 
     const handleRequestQuote = () => {
-        trackCTAClick('Request Quote', 'Services Page');
+        trackCTAClick('Request Quote', `Services Page - ${activeService}`);
+        trackModalInteraction('Quote Modal', 'opened');
+        trackJourneyMilestone('Opened Quote Request');
         setIsQuoteModalOpen(true);
+    };
+
+    const handleCloseQuoteModal = () => {
+        trackModalInteraction('Quote Modal', 'closed');
+        setIsQuoteModalOpen(false);
+    };
+
+    // Track pricing tier hover/view
+    const handlePricingHover = (tierName: string) => {
+        trackPricingView(tierName, activeService);
     };
 
     return (
         <main className="min-h-screen bg-background">
             <Header />
 
-            {/* Compact Hero */}
-            <section className="pt-28 pb-8 px-6 bg-gradient-to-br from-primary to-primary/90">
+            {/* Hero Section */}
+            <section
+                className="pt-28 pb-8 px-6 bg-gradient-to-br from-primary to-primary/90"
+                data-section-name="Hero"
+            >
                 <div className="container mx-auto max-w-5xl text-center">
                     <h1 className="text-3xl md:text-5xl font-bold text-primary-foreground mb-4">
                         Our Services
@@ -57,20 +108,20 @@ const ServicesPage = () => {
                     {/* Service Toggle Pills */}
                     <div className="inline-flex bg-background/10 backdrop-blur-sm rounded-full p-1 gap-1">
                         <button
-                            onClick={() => setActiveService('recruitment')}
+                            onClick={() => handleServiceToggle('recruitment')}
                             className={`px-6 md:px-8 py-3 rounded-full font-semibold transition-all duration-300 ${activeService === 'recruitment'
-                                ? 'bg-secondary text-secondary-foreground shadow-lg'
-                                : 'text-primary-foreground hover:bg-background/10'
+                                    ? 'bg-secondary text-secondary-foreground shadow-lg'
+                                    : 'text-primary-foreground hover:bg-background/10'
                                 }`}
                         >
                             <Users className="w-4 h-4 inline mr-2" />
                             Recruitment
                         </button>
                         <button
-                            onClick={() => setActiveService('hrm')}
+                            onClick={() => handleServiceToggle('hrm')}
                             className={`px-6 md:px-8 py-3 rounded-full font-semibold transition-all duration-300 ${activeService === 'hrm'
-                                ? 'bg-accent text-accent-foreground shadow-lg'
-                                : 'text-primary-foreground hover:bg-background/10'
+                                    ? 'bg-accent text-accent-foreground shadow-lg'
+                                    : 'text-primary-foreground hover:bg-background/10'
                                 }`}
                         >
                             <Building2 className="w-4 h-4 inline mr-2" />
@@ -85,8 +136,11 @@ const ServicesPage = () => {
                 <section className="py-12 px-6 animate-fade-in">
                     <div className="container mx-auto max-w-6xl">
 
-                        {/* Service Header with Image */}
-                        <div className="bg-gradient-to-br from-secondary/10 to-secondary/5 rounded-3xl p-6 md:p-10 mb-12 border-2 border-secondary/20">
+                        {/* Service Overview */}
+                        <div
+                            className="bg-gradient-to-br from-secondary/10 to-secondary/5 rounded-3xl p-6 md:p-10 mb-12 border-2 border-secondary/20"
+                            data-section-name="Recruitment Overview"
+                        >
                             <div className="grid md:grid-cols-2 gap-8 items-center">
                                 <div>
                                     <div className="flex items-center gap-2 mb-4">
@@ -104,7 +158,6 @@ const ServicesPage = () => {
                                         Stop wasting money on the wrong hires. Get quality candidates fast with pricing you can plan for.
                                     </p>
 
-                                    {/* Quick Benefits */}
                                     <div className="space-y-2 mb-6">
                                         <div className="flex items-center gap-2 text-sm">
                                             <CheckCircle2 className="w-4 h-4 text-secondary flex-shrink-0" />
@@ -145,13 +198,16 @@ const ServicesPage = () => {
                             </div>
                         </div>
 
-                        {/* Pricing Tiers - Simplified */}
-                        <div className="mb-12">
+                        {/* Pricing Tiers */}
+                        <div className="mb-12" data-section-name="Recruitment Pricing">
                             <h3 className="text-2xl font-bold text-foreground mb-6 text-center">Pricing Plans</h3>
 
                             <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
                                 {/* Entry Level */}
-                                <div className="bg-card rounded-2xl p-5 border-2 border-border hover:border-secondary/30 hover:shadow-lg transition-all">
+                                <div
+                                    className="bg-card rounded-2xl p-5 border-2 border-border hover:border-secondary/30 hover:shadow-lg transition-all"
+                                    onMouseEnter={() => handlePricingHover('Entry Level')}
+                                >
                                     <div className="text-sm font-bold text-secondary mb-2">ENTRY LEVEL</div>
                                     <div className="text-3xl font-bold text-primary mb-1">₦160K</div>
                                     <div className="text-xs text-muted-foreground mb-3">per hire</div>
@@ -164,7 +220,10 @@ const ServicesPage = () => {
                                 </div>
 
                                 {/* Junior */}
-                                <div className="bg-gradient-to-br from-secondary/10 to-secondary/5 rounded-2xl p-5 border-2 border-secondary relative hover:shadow-xl transition-all">
+                                <div
+                                    className="bg-gradient-to-br from-secondary/10 to-secondary/5 rounded-2xl p-5 border-2 border-secondary relative hover:shadow-xl transition-all"
+                                    onMouseEnter={() => handlePricingHover('Junior Roles')}
+                                >
                                     <div className="absolute -top-2 -right-2 bg-secondary text-secondary-foreground text-xs font-bold px-3 py-1 rounded-full">
                                         POPULAR
                                     </div>
@@ -180,7 +239,10 @@ const ServicesPage = () => {
                                 </div>
 
                                 {/* Mid Level */}
-                                <div className="bg-card rounded-2xl p-5 border-2 border-border hover:border-secondary/30 hover:shadow-lg transition-all">
+                                <div
+                                    className="bg-card rounded-2xl p-5 border-2 border-border hover:border-secondary/30 hover:shadow-lg transition-all"
+                                    onMouseEnter={() => handlePricingHover('Mid-Level')}
+                                >
                                     <div className="text-sm font-bold text-secondary mb-2">MID-LEVEL</div>
                                     <div className="text-3xl font-bold text-primary mb-1">₦350K</div>
                                     <div className="text-xs text-muted-foreground mb-3">per hire</div>
@@ -193,7 +255,10 @@ const ServicesPage = () => {
                                 </div>
 
                                 {/* Tech */}
-                                <div className="bg-card rounded-2xl p-5 border-2 border-border hover:border-secondary/30 hover:shadow-lg transition-all">
+                                <div
+                                    className="bg-card rounded-2xl p-5 border-2 border-border hover:border-secondary/30 hover:shadow-lg transition-all"
+                                    onMouseEnter={() => handlePricingHover('Tech Talent')}
+                                >
                                     <div className="text-sm font-bold text-secondary mb-2">TECH TALENT</div>
                                     <div className="text-3xl font-bold text-primary mb-1">8%</div>
                                     <div className="text-xs text-muted-foreground mb-3">of annual salary</div>
@@ -208,7 +273,10 @@ const ServicesPage = () => {
                         </div>
 
                         {/* How It Works */}
-                        <div className="bg-gradient-to-r from-secondary/5 to-accent/5 rounded-2xl p-6 md:p-8 mb-8">
+                        <div
+                            className="bg-gradient-to-r from-secondary/5 to-accent/5 rounded-2xl p-6 md:p-8 mb-8"
+                            data-section-name="How Recruitment Works"
+                        >
                             <h3 className="text-xl font-bold text-foreground mb-6 text-center">How It Works</h3>
                             <div className="grid md:grid-cols-3 gap-6">
                                 <div className="text-center">
@@ -236,7 +304,7 @@ const ServicesPage = () => {
                         </div>
 
                         {/* Final CTA */}
-                        <div className="text-center">
+                        <div className="text-center" data-section-name="Recruitment CTA">
                             <p className="text-muted-foreground mb-4">Ready to build your team?</p>
                             <div className="flex flex-col sm:flex-row gap-3 justify-center">
                                 <Button variant="cta" size="lg" onClick={handleDownloadRecruitment}>
@@ -258,8 +326,11 @@ const ServicesPage = () => {
                 <section className="py-12 px-6 animate-fade-in">
                     <div className="container mx-auto max-w-6xl">
 
-                        {/* Service Header with Image */}
-                        <div className="bg-gradient-to-br from-accent/10 to-accent/5 rounded-3xl p-6 md:p-10 mb-12 border-2 border-accent/20">
+                        {/* Service Overview */}
+                        <div
+                            className="bg-gradient-to-br from-accent/10 to-accent/5 rounded-3xl p-6 md:p-10 mb-12 border-2 border-accent/20"
+                            data-section-name="HRM Overview"
+                        >
                             <div className="grid md:grid-cols-2 gap-8 items-center">
                                 <div>
                                     <img
@@ -287,7 +358,6 @@ const ServicesPage = () => {
                                         Get fractional HR that grows with you—from 2 to 120+ employees with transparent per-employee pricing.
                                     </p>
 
-                                    {/* Quick Benefits */}
                                     <div className="space-y-2 mb-6">
                                         <div className="flex items-center gap-2 text-sm">
                                             <CheckCircle2 className="w-4 h-4 text-accent flex-shrink-0" />
@@ -317,13 +387,16 @@ const ServicesPage = () => {
                             </div>
                         </div>
 
-                        {/* HR Tiers - Simplified Cards */}
-                        <div className="mb-12">
+                        {/* HR Tiers */}
+                        <div className="mb-12" data-section-name="HRM Pricing">
                             <h3 className="text-2xl font-bold text-foreground mb-6 text-center">Choose Your Tier</h3>
 
                             <div className="space-y-4">
                                 {/* Starter */}
-                                <div className="bg-card rounded-2xl p-5 border-2 border-border hover:border-accent/30 hover:shadow-lg transition-all">
+                                <div
+                                    className="bg-card rounded-2xl p-5 border-2 border-border hover:border-accent/30 hover:shadow-lg transition-all"
+                                    onMouseEnter={() => handlePricingHover('Starter HR')}
+                                >
                                     <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
                                         <div className="flex items-start gap-4">
                                             <div className="w-12 h-12 bg-accent/10 rounded-xl flex items-center justify-center flex-shrink-0">
@@ -350,7 +423,10 @@ const ServicesPage = () => {
                                 </div>
 
                                 {/* Growth */}
-                                <div className="bg-gradient-to-r from-accent/10 to-accent/5 rounded-2xl p-5 border-2 border-accent hover:shadow-xl transition-all relative">
+                                <div
+                                    className="bg-gradient-to-r from-accent/10 to-accent/5 rounded-2xl p-5 border-2 border-accent hover:shadow-xl transition-all relative"
+                                    onMouseEnter={() => handlePricingHover('Growth HR')}
+                                >
                                     <div className="absolute -top-2 -right-2 bg-accent text-accent-foreground text-xs font-bold px-3 py-1 rounded-full">
                                         RECOMMENDED
                                     </div>
@@ -380,7 +456,10 @@ const ServicesPage = () => {
                                 </div>
 
                                 {/* Advanced */}
-                                <div className="bg-card rounded-2xl p-5 border-2 border-border hover:border-accent/30 hover:shadow-lg transition-all">
+                                <div
+                                    className="bg-card rounded-2xl p-5 border-2 border-border hover:border-accent/30 hover:shadow-lg transition-all"
+                                    onMouseEnter={() => handlePricingHover('Advanced HR')}
+                                >
                                     <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
                                         <div className="flex items-start gap-4">
                                             <div className="w-12 h-12 bg-accent/10 rounded-xl flex items-center justify-center flex-shrink-0">
@@ -407,7 +486,10 @@ const ServicesPage = () => {
                                 </div>
 
                                 {/* Strategic */}
-                                <div className="bg-card rounded-2xl p-5 border-2 border-border hover:border-accent/30 hover:shadow-lg transition-all">
+                                <div
+                                    className="bg-card rounded-2xl p-5 border-2 border-border hover:border-accent/30 hover:shadow-lg transition-all"
+                                    onMouseEnter={() => handlePricingHover('Strategic HR')}
+                                >
                                     <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
                                         <div className="flex items-start gap-4">
                                             <div className="w-12 h-12 bg-accent/10 rounded-xl flex items-center justify-center flex-shrink-0">
@@ -436,7 +518,10 @@ const ServicesPage = () => {
                         </div>
 
                         {/* Add-ons */}
-                        <div className="bg-gradient-to-r from-accent/5 to-muted/30 rounded-2xl p-6 mb-8 border border-accent/20">
+                        <div
+                            className="bg-gradient-to-r from-accent/5 to-muted/30 rounded-2xl p-6 mb-8 border border-accent/20"
+                            data-section-name="HRM Add-ons"
+                        >
                             <h3 className="text-lg font-bold text-foreground mb-4">Add-on Services</h3>
                             <div className="grid md:grid-cols-3 gap-4">
                                 <div className="flex items-start gap-2">
@@ -464,7 +549,7 @@ const ServicesPage = () => {
                         </div>
 
                         {/* Final CTA */}
-                        <div className="text-center">
+                        <div className="text-center" data-section-name="HRM CTA">
                             <p className="text-muted-foreground mb-4">Ready to strengthen your HR?</p>
                             <div className="flex flex-col sm:flex-row gap-3 justify-center">
                                 <Button variant="cta" size="lg" onClick={handleDownloadHRM}>
@@ -485,7 +570,7 @@ const ServicesPage = () => {
             <BookStrategyCall />
 
             {/* Quote Modal */}
-            <QuoteModal isOpen={isQuoteModalOpen} onClose={() => setIsQuoteModalOpen(false)} />
+            <QuoteModal isOpen={isQuoteModalOpen} onClose={handleCloseQuoteModal} />
 
             <Footer />
         </main>
